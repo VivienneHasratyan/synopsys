@@ -9,7 +9,7 @@ class Crepe:
     def __str__(self):
         return (f"Crepe ({self.base_type} base)\n"
                 f"Fillings: {', '.join(self.fillings)}\n"
-                f"Toppings: {', '.join(self.toppingss) if self.toppingss else 'None'}\n"
+                f"Toppings: {', '.join(self.toppings) if self.toppings else 'None'}\n"
                 f"Fold Style: {self.fold_style}\n"
                 f"Extra: {', '.join(self.extras) if self.extras else 'None'}")
 
@@ -72,12 +72,15 @@ class SalmonHolidayCrepeBuilder(CrepeBuilder):
     def add_toppings(self):
         self.crepe.toppings = ["olives"]
 
+    def set_fold_style(self):
+        self.crepe.fold_style = "in half"
+
     def add_extras(self):
         self.crepe.extras = []
 
 class CrepeDirector:
     def __init__(self, builder):
-        self.builder = builder
+        self._builder = builder
 
     def construct_crepe(self):
         self._builder.reset()
@@ -91,15 +94,15 @@ class CrepeDirector:
 if __name__ == "__main__":
     director = CrepeDirector(CrepeSuzetteBuilder())
     crepe1 = director.construct_crepe()
-    print("== Crêpe Suzette ==")
-    print(crepe1)
+    print("== Crêpe Suzette ==\n")
+    print(f"{crepe1}\n")
 
     director = CrepeDirector(SuperNutellaCrepeBuilder())
-    crepe1 = director.construct_crepe()
-    print("== Super Nutella Crêpe ==")
-    print(crepe1)
+    crepe2 = director.construct_crepe()
+    print("== Super Nutella Crêpe ==\n")
+    print(f"{crepe2}\n")
 
     director = CrepeDirector(SalmonHolidayCrepeBuilder())
-    crepe1 = director.construct_crepe()
-    print("== Salmon Holiday Crêpe ==")
-    print(crepe1)
+    crepe3 = director.construct_crepe()
+    print("== Salmon Holiday Crêpe ==\n")
+    print(f"{crepe3}\n")
